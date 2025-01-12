@@ -49,12 +49,65 @@ temp_min <- crop(bio1,kor_extent)
 <img src="./img/해양 환경 변수.png" width="50%">
 
 ## 1.2 주요 품종의 주산지 선정과 주산지의 위경도 추출
-주산지 선정은 주요 품종별 양식 면적의 분포를 통해 선정하였습니다.
+주산지 선정은 box plot을 이용하여 주요 품종별 양식 면적의 분포를 확인해서 양식 면적 값이 이상치로 분류되는 지역들을 주산지로 선정하였습니다.
 https://github.com/HyunJae0/cross-validation-maxent-model/tree/main/%EC%A3%BC%EC%82%B0%EC%A7%80%20%EC%84%A0%EC%A0%95
+
+다음 그림은 2005, 2010, 2015, 2020년 전복류 양식 면적에 대한 box plot입니다.
 <img src="./img/전복 양식면적.png" width="50%">
 
 QGIS(https://www.qgis.org/) 프로그램을 사용해 주소를 위경도 좌표로 변환하기 위해 어업총조사 데이터 정의서를 따라 숫자를 주소로 변환하였습니다. (예를 들어 11 -> '서울')
 변환 방법은 다음 글을 참고하였습니다. (https://sangdee.tistory.com/2)
 
+## 1.3 아열대 어종의 위치 정보
+아열대 어종의 위치 정보는 R에서 제공하는 'rgbif' 라이브러리를 사용해서, GBIF(https://www.gbif.org/)에서 제공하는 데이터를 사용하였습니다. 마찬가지로 우리나라 해역에 맞춰 위치(위경도) 정보를 추출하였습니다.
 
+GBIF에서 위치 정보를 받아오는 과정은 다음 예시와 같습니다. 다음 코드는 해삼의 모든 출현 정보를 GBIF에서 받아온 다음, 한국 해역에 맞춰 출현 위치 정보(위경도)를 추출하는 과정입니다.
+```
+library(rgbif)
+occ <- occ_data(
+  taxonKey =  222, # 해삼에 대한 key
+    basisOfRecord = c("FOSSIL_SPECIMEN","HUMAN_OBSERVATION","MATERIAL_CITATION","MATERIAL_SAMPLE",
+                    "LIVING_SPECIMEN","MACHINE_OBSERVATION","OBSERVATION","PRESERVED_SPECIMEN",
+                    "OCCURRENCE"), # 모든 출현 정보
+  country = 'KR', # Korea
+  occurrenceStatus = "PRESENT" 
+  )
+
+
+## 각 출현 정보의 위경도
+a <- occ$FOSSIL_SPECIMEN$data$decimalLatitude
+a1 <- occ$FOSSIL_SPECIMEN$data$decimalLongitude
+b <- occ$HUMAN_OBSERVATION$data$decimalLatitude
+b1 <- occ$HUMAN_OBSERVATION$data$decimalLongitude
+c <- occ$MATERIAL_CITATION$data$decimalLatitude
+c1 <- occ$MATERIAL_CITATION$data$decimalLongitude
+d <- occ$MATERIAL_SAMPLE$data$decimalLatitude
+d1 <- occ$MATERIAL_SAMPLE$data$decimalLongitude
+e <- occ$LIVING_SPECIMEN$data$decimalLatitude
+e1 <- occ$LIVING_SPECIMEN$data$decimalLongitude
+f <- occ$MACHINE_OBSERVATION$data$decimalLatitude
+f1 <- occ$MACHINE_OBSERVATION$data$decimalLongitude
+g <- occ$OBSERVATION$data$decimalLatitude
+g1 <- occ$OBSERVATION$data$decimalLongitude
+h <- occ$PRESERVED_SPECIMEN$data$decimalLatitude
+h1 <- occ$PRESERVED_SPECIMEN$data$decimalLongitude
+i <- occ$OCCURRENCE$data$decimalLatitude
+i1 <- occ$OCCURRENCE$data$decimalLongitude
+## 모든 위경도 통합
+combined_lat <- c(a,b,c,d,e,f,g,h,i)
+combined_lon <- c(a1,b1,c1,d1,e1,f1,g1,h1,i1)
+```
+
+```
+해삼 <- data.frame(lon = combined_lon,lat = combined_lat)
+해삼_p <- na.omit(해삼) # na 값은 제거
+
+해삼_po <- 해삼_p %>%
+  filter(lon >= 125 & lon <= 130.9 & 
+           lat >= 33.11 & lat <= 38.613)
+
+해삼_points <- 해삼_po[,c('lon','lat')]
+## 출현 정보 저장
+write.csv(해삼_points, "해삼출현좌표.csv", row.names = FALSE)
+```
 
