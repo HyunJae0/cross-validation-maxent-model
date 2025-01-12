@@ -112,6 +112,10 @@ write.csv(해삼_points, "해삼출현좌표.csv", row.names = FALSE)
 ```
 
 ## 2. Maxent Modeling
+### 2.1 Maxent Model Hyperparameter Tuning
+
+
+### 2.2 Maxent Model K-fold CV
 
 
 # 결과
