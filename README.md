@@ -113,6 +113,8 @@ write.csv(해삼_points, "해삼출현좌표.csv", row.names = FALSE)
 
 ## 2. Maxent Modeling
 ### 2.1 Maxent Model Hyperparameter Tuning
+모델의 하이퍼파라미터 튜닝 과정은 아래 .R 파일에 기술되어 있습니다.
+https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/ENMeval_hyperparameter_tuning.R
 
 하이퍼파라미터에 대한 설명: https://groups.google.com/g/maxent/c/yRBlvZ1_9rQ
 
