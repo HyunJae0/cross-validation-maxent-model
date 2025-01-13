@@ -119,6 +119,7 @@ MaxEnt 모형은 다양한 공간 규모와 환경요인 변수를 기반으로 
 여기서 z는 위치 x_i에서의 J개의 환경 변수 벡터이고 람다는 회귀 계수 벡터입니다. 분자는 다음과 같이 계산됩니다.
 
 ![image](https://github.com/user-attachments/assets/71b401bd-7fac-4bbd-afc4-42e31b44bdc1)
+
 분자는 위치 x_i에서의 '발생 가능성'을 나타냅니다. 분모는 모든 위치 x_i에 대한 합이므로, P(z(x_i))는 0과 1사이의 확률값으로 변환됩니다. 즉, P(z(x_i)) 값은 특정 위치 x_i에서의 '발생 가능 확률'입니다.
 
 ### 2.1 Maxent Model Hyperparameter Tuning
