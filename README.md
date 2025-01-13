@@ -121,8 +121,7 @@ https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/ENMeval_hype
 ### 2.2 Maxent Model Cross Validation
 
 아래 .R 파일에 기술되어 있습니다.
-https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/Maxent%20modeling.R
-
+https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/Maxent.R
 
 # 결과
 Maxent 모델의 결과로, 모델의 설명력을 나타내는 ROC 값과 근미래와 먼 미래에 대한 종의 잠재 출현 확률분포를 받을 수 있습니다.
