@@ -128,7 +128,7 @@ https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/ENMeval_hype
 https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/Maxent.R
 
 # 결과
-Maxent 모델의 기본 결과로, 모델의 설명력을 나타내는 ROC 값과 근미래와 먼 미래에 대한 종의 잠재 출현 확률분포를 받을 수 있습니다. 이외에도 별도의 설정을 통해 각 환경 변수가 Maxent 예측에 어떻게 영향을 미치는지 보여주는 'Response curves'와 Maxent 모델에 대한 환경 변수의 기여도를 나타내는 'Analysis of variable contributions', 변수 중요도를 나타내는 'jacknife test' 결과를 확인할 수 있습니다.
+Maxent 모델의 기본 결과로, 모델의 설명력을 나타내는 ROC 값과 근미래와 먼 미래에 대한 종의 잠재 출현 확률분포를 받을 수 있습니다. 이외에도 별도의 설정을 통해 각 환경 변수가 Maxent 예측에 어떻게 영향을 미치는지 보여주는 'Response curves'와 Maxent 모델에 대한 환경 변수의 기여도를 나타내는 'Analysis of variable contributions' 등 다양한 결과를 확인할 수 있습니다.
 
 ![image](https://github.com/user-attachments/assets/301d5682-453d-4f82-bf71-752d2aa49369)
 
