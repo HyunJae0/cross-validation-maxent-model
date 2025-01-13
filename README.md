@@ -115,10 +115,12 @@ write.csv(해삼_points, "해삼출현좌표.csv", row.names = FALSE)
 MaxEnt 모형은 다양한 공간 규모와 환경요인 변수를 기반으로 종의 지리적 분포, 서식지 적합성 등을 예측하는 생태적 지위 모형(Ecological Niche Model) 중 하나로서, 최대 엔트로피를 기반으로 동식물의 출현 지점 자료만을 가지고 잠재 출현 확률분포를 예측할 수 있는 머신러닝 기법입니다. Maxent 식은 다음과 같습니다.
 
 ![image](https://github.com/user-attachments/assets/6f27ac9f-a3b6-499e-a5a6-ca184ff6fc96)
+
 여기서 z는 위치 x_i에서의 J개의 환경 변수 벡터이고 람다는 회귀 계수 벡터입니다. 분자는 다음과 같이 계산됩니다.
 
 ![image](https://github.com/user-attachments/assets/71b401bd-7fac-4bbd-afc4-42e31b44bdc1)
 분자는 위치 x_i에서의 '발생 가능성'을 나타냅니다. 분모는 모든 위치 x_i에 대한 합이므로, P(z(x_i))는 0과 1사이의 확률값으로 변환됩니다. 즉, P(z(x_i)) 값은 특정 위치 x_i에서의 '발생 가능 확률'입니다.
+
 ### 2.1 Maxent Model Hyperparameter Tuning
 모델의 하이퍼파라미터 튜닝 과정은 아래 .R 파일에 기술되어 있습니다.
 https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/ENMeval_hyperparameter_tuning.R
