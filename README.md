@@ -118,7 +118,10 @@ https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/ENMeval_hype
 
 하이퍼파라미터에 대한 설명: https://groups.google.com/g/maxent/c/yRBlvZ1_9rQ
 
-### 2.2 Maxent Model K-fold CV
+### 2.2 Maxent Model Cross Validation
+
+아래 .R 파일에 기술되어 있습니다.
+https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/Maxent%20modeling.R
 
 
 # 결과
