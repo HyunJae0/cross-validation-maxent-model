@@ -171,6 +171,17 @@ which(enmeval_results@results$delta.AIC == 0)
 하이퍼파라미터에 대한 설명: https://groups.google.com/g/maxent/c/yRBlvZ1_9rQ
 
 ### 2.2 Maxent Model Cross Validation
+2.1에서 얻은 하이퍼파라미터와 모델의 입력값으로 환경 변수 레이어 스택과 종의 출현 좌표를 넣어서 Maxent 모델을 구성합니다. 이때, 다음과 같이 fold 수인 'replicates'와 'replicatetype=Crossvalidate'를 지정하여 cross validation을 수행할 수 있습니다.
+```
+xm <- maxent(kor_climate,  basis_points, args=c(
+  'maximumbackground=1000','randomtestpoints=30','replicates=10','replicatetype=Crossvalidate',
+  'betamultiplier=2.5','hinge=true',
+  'responsecurves=true','jackknife=true'))
+```
+위의 코드는 10 fold cross validation이므로 10개의 서로 다른 fold로부터 10개의 예측 결과물이 생성됩니다. 각 fold마다 학습에 사용된 데이터가 다르기 때문에, 모델이 추정한 예측 결과인 서식 적합도(적합 확률)지도도 조금씩 달라질 수 있습니다. 그러므로 보다 안정적인 분포 추정을 하기 위해 다음과 같이 평균을 이용해서 종합적인 예측 지도를 만듭니다.
+```
+plot(mean(predict_204050), main="SSP5-8.5 2040-2050", col = colors(100000),box = FALSE, axes = FALSE, zlim = c(0,1))
+```
 
 아래 .R 파일에 기술되어 있습니다.
 https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/Maxent.R
