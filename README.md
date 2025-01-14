@@ -126,7 +126,47 @@ MaxEnt 모형은 다양한 공간 규모와 환경요인 변수를 기반으로 
 모델의 하이퍼파라미터 튜닝 과정은 아래 .R 파일에 기술되어 있습니다.
 https://github.com/HyunJae0/cross-validation-maxent-model/blob/main/ENMeval_hyperparameter_tuning.R
 
+튜닝에 필요한 것은 종의 출현 정보(위경도 좌표)와 예측에 사용할 환경 변수들. 그리고 background points라는 좌표입니다. 
 
+background points는 종이 출현하고 서식할 수 있는 환경의 좌표입니다. (종이 관찰되지 않았지만 모델링에 참고할 무작위 지점으로 실제 출현 좌표와 동일한 좌표를 포함하고 가지게 될 수도 있습니다.)
+
+출현 정보와 환경 변수들은 이미 가지고 있으므로 튜닝을 하기 위해서는 background points가 필요합니다. 다음 코드들은 background points를 생성하는 과정입니다.
+```
+env = stack(bio1, bio2, bio3, bio4, bio5, bio6)
+occ <-  read.csv("종의 출현 정보.csv") # 종이 출현한 정보(위경도)
+occur.ras <- rasterize(occ,env,1) #occ는 종의 출현 정보 # env는 예측에 사용할 환경 변수들
+presences <- which(values(occur.ras)==1)
+pres.locs <- coordinates(occur.ras)[presences,]
+```
+occ(출현 좌표)와 env(환경 변수 레이어)를 기반으로 출현 위치를 raster 형태로 변환합니다. 이 raster에서 각 셀값이 1인 셀(종이 관찰된 위치)을 선택합니다.
+
+pres.locs <- coordinates(occur.ras)[presences, ]을 통해 종이 관찰된 셀들의 실제 좌표를 추출하여 저장합니다. 이렇게 하면 종이 출현한 모든 좌표를 일반 행렬 형태로 얻을 수 있습니다.
+
+그다음, 한국 해역 크기에 맞게(env의 범위) 출현 지점의 공간 분포를 고려한 출현 지점의 커널 밀도를 계산합니다. 최종적으로 env와 동일한 형태(셀 크기, 범위)를 갖는 커널 밀도 추정 raster가 생성됩니다. 이 raster를 사용해서 background points를 생성합니다. 
+```
+bg <- xyFromCell(dens.ras2, sample(which(!is.na(values(subset(env,1)))), 10000
+                                   , prob=values(dens.ras2)[!is.na(values(subset(env,1)))]))
+```
+실제로 유효한 데이터(해양 환경 변수이므로 수온, 염도 값)가 있는 셀(NA가 아닌 셀)을 이용해서 kde2d로 추정된 밀도를 추출 확률로 사용합니다. 즉, 종이 많이 발생한 지역일수록 background point도 많이 뽑히게 됩니다.
+
+일반적으로 background point 10,000개를 추출하지만, background point를 추출하기 위한 종의 실제 출현 좌표의 수가 적을 경우, 1,000개에서 5,000개 사이로 background point를 추출합니다.
+
+이렇게 background points까지 생성하였으면, 다음과 같이 ENMeval 패키지의 ENMevaluate( ) 메서드로 하이퍼파라미터 튜닝을 진행합니다. 
+```
+enmeval_results <- ENMevaluate(occ, env, method = "randomkfold", "kfolds = 10", algorithm="maxent.jar",
+                               bg.coords = bg,RMvalues = seq(0.5, 4, 0.5), fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"))
+```
+여기서 사용되는 입력은 occ(종의 실제 출현 좌표), env(환경 변수 레이어들의 stack), bg.coords(위에서 만든 background point)입니다. 
+method = 'randomkfold'와  'kfolds = 10'은 랜덤으로 fold 10개를 만들어 k-fold cross validation을 수행하겠다는 의미입니다.
+
+RMvalues = seq(0.5, 4, 0.5)와 fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT")는 Maxent에서 사용되는 가능한 모든 feature 조합을 값 0.5부터 4까지 0.5 간격으로 탐색하겠다는 의미입니다.
+
+위의 6가지 feature를 사용한 조합 중 Delta AIC 값이 0이 되는 하이퍼파라미터를 선택합니다. AIC = -2ln(L) + 2k로 -2ln(L)은 모형의 적합도, k는 추정된 파라미터의 개수입니다. 그러므로 AIC 점수가 낮을수록 적합한 모델입니다.
+
+Delta AIC는 최적 모델과 모델의 AIC 점수 차이입니다. 즉, 최적 모델의 경우 자기 자신의 AIC 점수 차이는 0이 됩니다. 그러므로 Delta AIC = 0일 때의 조합("L", "LQ", "H", "LQH", "LQHP", "LQHPT"들의 조합)을 찾는 것입니다.
+```
+which(enmeval_results@results$delta.AIC == 0)
+```
 
 하이퍼파라미터에 대한 설명: https://groups.google.com/g/maxent/c/yRBlvZ1_9rQ
 
