@@ -116,7 +116,7 @@ MaxEnt 모형은 다양한 공간 규모와 환경요인 변수를 기반으로 
 
 ![image](https://github.com/user-attachments/assets/6f27ac9f-a3b6-499e-a5a6-ca184ff6fc96)
 
-여기서 z는 위치 x_i에서의 J개의 환경 변수 벡터이고 람다는 회귀 계수 벡터입니다. 분자는 다음과 같이 계산됩니다.
+여기서 z는 위치 x_i에서의 J개의 환경 변수 벡터이고 람다는 회귀 계수 벡터입니다.
 
 ![image](https://github.com/user-attachments/assets/71b401bd-7fac-4bbd-afc4-42e31b44bdc1)
 
