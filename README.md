@@ -112,7 +112,7 @@ write.csv(해삼_points, "해삼출현좌표.csv", row.names = FALSE)
 ```
 
 ## 2. Maxent Modeling
-MaxEnt 모형은 다양한 공간 규모와 환경요인 변수를 기반으로 종의 지리적 분포, 서식지 적합성 등을 예측하는 생태적 지위 모형(Ecological Niche Model) 중 하나로서, 최대 엔트로피를 기반으로 동식물의 출현 지점 자료만을 가지고 잠재 출현 확률분포를 예측할 수 있는 머신러닝 기법입니다. Maxent 식은 다음과 같습니다.
+MaxEnt 모형은 다양한 공간 규모와 환경요인 변수를 기반으로 종의 지리적 분포, 서식지 적합성 등을 예측하는 생태적 지위 모형(Ecological Niche Model) 중 하나로서, 동식물의 출현 지점 자료만을 가지고 잠재 출현 확률분포를 예측할 수 있습니다.
 
 ![image](https://github.com/user-attachments/assets/6f27ac9f-a3b6-499e-a5a6-ca184ff6fc96)
 
