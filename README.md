@@ -63,7 +63,7 @@ GBIF에서 위치 정보를 받아오는 과정은 다음 예시와 같습니다
 ```
 library(rgbif)
 occ <- occ_data(
-  taxonKey =  222, # 해삼에 대한 key
+  taxonKey =  222, # 해삼류에 대한 key
     basisOfRecord = c("FOSSIL_SPECIMEN","HUMAN_OBSERVATION","MATERIAL_CITATION","MATERIAL_SAMPLE",
                     "LIVING_SPECIMEN","MACHINE_OBSERVATION","OBSERVATION","PRESERVED_SPECIMEN",
                     "OCCURRENCE"), # 모든 출현 정보
