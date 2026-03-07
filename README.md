@@ -47,7 +47,7 @@ $\pi$ 하에서의 $f_j$의 기댓값 $\pi[f_j]$는 종의 true distribution $\p
 
 $\pi[f_j]$는 $\pi$에 따라 $X$에서 독립적으로(복원 추출로) 추출된 sample points $x_1, \dots, x_m$을 사용해 근사할 수 있다. 즉, "어느 픽셀에 해당 종이 서식할까"라는 생태학 문제를, "표본 points(즉, 종의 출현 지점들)이 보여주는 feature 평균(환경 평균)은 무엇인가"라는 문제로 바꾸는 것이다. 
 
-$f_j$의 표본 평균은 $\dfrac{1}{m} \displaystyle{sum_{i=1}^m f_j (x_i)}$이며, 이를 $\tilde{\pi}[f_j]$라 쓴다. 여기서 $\tilde{\pi}$는 sample points에 대한 균등 분포이다. 이를 $\pi[f_j]$의 추정치로 사용한다. 
+$f_j$의 표본 평균은 $\dfrac{1}{m} \displaystyle{\sum_{i=1}^m f_j (x_i)}$이며, 이를 $\tilde{\pi}[f_j]$라 쓴다. 여기서 $\tilde{\pi}$는 sample points에 대한 균등 분포이다. 이를 $\pi[f_j]$의 추정치로 사용한다. 
 
 예를 들어 종의 출현 지점들의 평균 염분이 높고, 평균 수온이 높다면, 모델은 전체 연구 영역 위에 확률분포를 놓았을 때 그 평균들이 비슷해지도록 만든다. 즉 sample points이 보여 준 "평균적인 서식 환경"을 반영하게 하는 것이다. 
 
