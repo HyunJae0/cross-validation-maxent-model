@@ -82,7 +82,7 @@ $$|\hat{\pi}[f_j] - \tilde{\pi}[f_j]| \leq \beta_j, \quad \text{for each feature
 - 그래서 "정확히 같아야 한다"는 제약 대신, 오차 범위 $\beta_j$ 내에서만 근사적으로 일치하도록 제약을 완화하여 과적합을 방지하는 것이다. 
 
 이러한 제약 완화는 최적화 문제에서 $L_1$ 정규화의 형태가 된다. Maxent 분포는 다음 식을 최소화하는 문제가 된다. 
-$$ \tilde{\pi}[-\ln(q_\lambda)] + \sum_j \beta_j |\lambda_j| $$
+$$\tilde{\pi}[-\ln(q_\lambda)] + \sum_j \beta_j |\lambda_j|$$
 
 첫 번째 항은 앞서 정의한 log loss이고, 두 번째 항은 가중치 $\lambda_j$가 지나치게 커지는 것을 방지하기 위한 정규화 패널티이다. $L_1$ 정규화는 중요하지 않은 파라미터의 값을 0으로 만드는 특성이 있어, 모델이 실제로 중요한 feature만 선택하도록 유도할 수 있다. 
 
