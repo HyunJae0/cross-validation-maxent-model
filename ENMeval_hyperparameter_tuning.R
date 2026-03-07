@@ -33,7 +33,8 @@ enmeval_results <- ENMevaluate(occ, env, method = "randomkfold", kfolds = 10, al
 # 하이퍼파라미터 튜닝 결과 저장
 indices <- which(enmeval_results@results$delta.AICc == 0)
 ssp_204050_하이퍼파라미터 <-  enmeval_results@results[indices, ]
-ssp_204050_하이퍼파라미터$tune.args  # delta.AIC == 0일 때, rm.0.5_fc.LQ
+ssp_204050_하이퍼파라미터$tune.args  # delta.AICc == 0일 때, rm.0.5_fc.LQ
 
 write.csv(enmeval_results@results, "튜닝_결과.csv")
+
 
