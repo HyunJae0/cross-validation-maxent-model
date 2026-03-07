@@ -1,7 +1,7 @@
 ## maximum-entropy principle
 알 수 없는 확률분포를 를 근사할 때 가장 좋은 접근 방식은, 해당 미지의 분포에 대한 제약조건을 모두 만족시키면서, 그 제약조건들 하에서 엔트로피가 최대(즉, maximum entropy)가 되는 분포를 선택하는 것이다. 이를 **maximum-entropy principle**이라고 한다. 
 
-어떤 미지의 true distribution $\pi$가 있고, 유한한 집합 $X$의 개별 원소를 $x$라고 하자. 종 분포 모델링에서 $X$는 연구지역의 모든 픽셀(격자 칸)들의 집합, $x \in X$는 픽셀 하나이다. 논문에서는 $x$를 point라고 부른다. 
+어떤 미지의 true distribution $\pi$가 있고, 유한한 집합 $X$의 개별 원소를 $x$라고 하자. 종 분포 모델링에서 $X$는 연구지역의 모든 픽셀(격자 칸)들의 집합, $x \in X$는 픽셀 하나이다. [논문](https://www.sciencedirect.com/science/article/pii/S030438000500267X)에서는 $x$를 point라고 부른다. 
 
 분포 $\pi$는 각 $x$에 확률 $\pi(x)$를 할당하며, 이 확률들의 합은 1이 된다. 
 
